@@ -20,6 +20,11 @@ describe('calculateScore', () => {
     const rolls = [1, 5, 5, 4, 0, 0, 3, 7, 9, 0, 1, 2, 5, 4, 0, 0, 3, 3, 9, 0];
     expect(bowling.calculateScore(rolls)).toEqual(70);
   });
+
+  it('should return correct score in case of a frame contains a strike but not the last frame', () => {
+      const rolls = [1, 5, 5, 4, 0, 0, 3, 7, 9, 0, 1, 2, 5, 4, 10, 0, 3, 3, 9, 0];
+      expect(bowling.calculateScore(rolls)).toEqual(86);
+    });
 });
 
 describe('isSpare', () => {
@@ -28,6 +33,18 @@ describe('isSpare', () => {
   });
   it('should return false if sum is not 10', () => {
     expect(bowling.isSpare(3, 6)).toEqual(false);
+  });
+  it('should return false in case of strike', () => {
+    expect(bowling.isSpare(10, 0)).toEqual(false);
+  });
+});
+
+describe('isStrike', () => {
+  it('should return true if equal 10', () => {
+    expect(bowling.isStrike(10)).toEqual(true);
+  });
+  it('should return false if not equal 10', () => {
+    expect(bowling.isStrike(5)).toEqual(false);
   });
 });
 
