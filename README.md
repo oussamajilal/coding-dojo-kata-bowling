@@ -8,4 +8,6 @@ To install the project, execute the following command: `yarn install`
 
 ## Unit tests
 
-To run unit tests, execute the following command: `yarn jest`
+To run unit tests, execute the following command: `yarn tests`
+
+To run unit tests without generating coverage, execute the following command: `yarn tests:no-coverage`
