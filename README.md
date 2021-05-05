@@ -1,5 +1,7 @@
 # Coding Dojo > Kata > Bowling
 
+[![CI](https://github.com/oussamajilal/coding-dojo-kata-bowling/actions/workflows/main.yml/badge.svg)](https://github.com/oussamajilal/coding-dojo-kata-bowling/actions/workflows/main.yml)
+
 This is a repository for implementing the bowling kata from coding dojo: https://codingdojo.org/kata/Bowling/
 
 ## Installation
