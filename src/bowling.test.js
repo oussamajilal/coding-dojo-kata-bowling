@@ -22,9 +22,9 @@ describe('calculateScore', () => {
   });
 
   it('should return correct score in case of a frame contains a strike but not the last frame', () => {
-      const rolls = [1, 5, 5, 4, 0, 0, 3, 7, 9, 0, 1, 2, 5, 4, 10, 0, 3, 3, 9, 0];
-      expect(bowling.calculateScore(rolls)).toEqual(86);
-    });
+    const rolls = [1, 5, 5, 4, 0, 0, 3, 7, 9, 0, 1, 2, 5, 4, 10, 3, 3, 9, 0];
+    expect(bowling.calculateScore(rolls)).toEqual(86);
+  });
 });
 
 describe('isSpare', () => {
@@ -57,3 +57,11 @@ describe('isSecondRollInFrame', () => {
     expect(bowling.isSecondRollInFrame(5)).toEqual(true);
   });
 });
+
+describe('fixFramesAfterStrikes', () => {
+  it('should fill next roll in a frame with 0 after strike', () => {
+    const realRolls = [5, 4, 10, 3, 2, 0, 10, 1, 7];
+    const expectedRolls = [5, 4, 10, 0, 3, 2, 0, 10, 1, 7];
+    expect(bowling.fixFramesAfterStrikes(realRolls)).toEqual(expectedRolls);
+  });
+})
