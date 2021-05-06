@@ -6,9 +6,15 @@ This is a repository for implementing the bowling kata from coding dojo: https:/
 
 ## TODO
 
-[ ] Add a CLI command to simulate execution
+- [ ] Add a CLI command to simulate execution
+- [ ] Add the suggested test cases from the Kata
 
 ## Installation
+
+Requirements:
+
+- [Node](https://nodejs.org/en/download/)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install/)
 
 To install the project, execute the following command: `yarn install`
 
