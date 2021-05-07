@@ -35,6 +35,11 @@ describe('calculateScore', () => {
     const rolls = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5];
     expect(bowling.calculateScore(rolls)).toEqual(150);
   });
+
+  it('should return correct score in case of all the frames are strikes', () => {
+    const rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+    expect(bowling.calculateScore(rolls)).toEqual(300);
+  });
 });
 
 describe('isSpare', () => {

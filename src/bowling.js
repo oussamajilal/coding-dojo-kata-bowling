@@ -23,24 +23,33 @@ const isExtraFrame = (frameIndex) => frameIndex > 9;
 const calculateScore = (rolls) => {
   const frames = splitToFrames(rolls);
 
-  var spare = false;
-  var strike = false;
+  var previousFrameIsSpare = false;
+  var previousFrameIsStrike = false;
+  var doubleStrike = false;
 
   const frameScores = frames.map((frame, frameIndex) => {
     const frameScore = [...frame];
     const currentFrameIsExtra = isExtraFrame(frameIndex);
-    if (!currentFrameIsExtra) {
-      if ((spare || strike)) {
-        frameScore[0] *= 2;
-      }
+    const currentFrameIsStrike = isStrike(frame);
 
-      if (strike) {
-        frameScore[1] *= 2;
+    if (doubleStrike) {
+      if (currentFrameIsExtra) {
+        frameScore[0] *= 2;
+      } else {
+        frameScore[0] *= 3;
       }
     }
+    else if ((previousFrameIsSpare || previousFrameIsStrike) && !currentFrameIsExtra) {
+      frameScore[0] *= 2;
+    }
 
-    strike = isStrike(frame);
-    spare = isSpare(frame);
+    if (previousFrameIsStrike && !currentFrameIsStrike && !currentFrameIsExtra) {
+      frameScore[1] *= 2;
+    }
+
+    doubleStrike = previousFrameIsStrike && currentFrameIsStrike && !currentFrameIsExtra;
+    previousFrameIsStrike = isStrike(frame);
+    previousFrameIsSpare = isSpare(frame);
 
     return _.sum(frameScore);
   });
