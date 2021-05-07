@@ -7,7 +7,6 @@ This is a repository for implementing the bowling kata from coding dojo: https:/
 ## TODO
 
 - [ ] Add a CLI command to simulate execution
-- [ ] Add the suggested test cases from the Kata
 
 ## Installation
 

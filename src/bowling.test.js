@@ -40,6 +40,11 @@ describe('calculateScore', () => {
     const rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     expect(bowling.calculateScore(rolls)).toEqual(300);
   });
+
+  it('should return correct score in case of all the frames does not have strikes nor spares', () => {
+    const rolls = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9];
+    expect(bowling.calculateScore(rolls)).toEqual(90);
+  });
 });
 
 describe('isSpare', () => {
