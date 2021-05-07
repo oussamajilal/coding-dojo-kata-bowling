@@ -1,18 +1,16 @@
 import _ from 'lodash';
 
-const isSpare = (roll, followingRoll) => roll !== 10 && roll + followingRoll === 10;
+const isSpare = (frame) => !isStrike(frame) && _.sum(frame) === 10;
 
-const isStrike = (roll) => roll === 10;
-
-const isSecondRollInFrame = rollNumber => rollNumber % 2 === 1;
+const isStrike = (frame) => frame[0] === 10;
 
 const splitToFrames = (rolls) => {
   const newRolls = [...rolls];
   const frames = [];
   while (newRolls.length > 0) {
     const roll = newRolls.shift();
-    if (isStrike(roll)) {
-      frames.push([10, 0]);
+    if (isStrike([roll])) {
+      frames.push([roll]);
     } else {
       frames.push([roll, newRolls.shift()]);
     }
@@ -20,21 +18,34 @@ const splitToFrames = (rolls) => {
   return frames;
 }
 
-const fixFramesAfterStrikes = (rolls) => {
-  return _.flatten(splitToFrames(rolls));
-}
+const isExtraFrame = (frameIndex) => frameIndex > 9;
 
 const calculateScore = (rolls) => {
-  const newRolls = fixFramesAfterStrikes(rolls);
-  return _.sum(
-    newRolls.map((roll, index) => {
-      if (isSecondRollInFrame(index) && isSpare(newRolls[index - 1], roll)) return roll + newRolls[index + 1];
+  const frames = splitToFrames(rolls);
 
-      if (!isSecondRollInFrame(index) && isStrike(roll)) return roll + newRolls[index + 2] + newRolls[index + 3];
+  var spare = false;
+  var strike = false;
 
-      return roll;
-    })
-  );
+  const frameScores = frames.map((frame, frameIndex) => {
+    const frameScore = [...frame];
+    const currentFrameIsExtra = isExtraFrame(frameIndex);
+    if (!currentFrameIsExtra) {
+      if ((spare || strike)) {
+        frameScore[0] *= 2;
+      }
+
+      if (strike) {
+        frameScore[1] *= 2;
+      }
+    }
+
+    strike = isStrike(frame);
+    spare = isSpare(frame);
+
+    return _.sum(frameScore);
+  });
+
+  return _.sum(frameScores);
 };
 
-export default { calculateScore, isSpare, isStrike, isSecondRollInFrame, splitToFrames, fixFramesAfterStrikes };
+export default { calculateScore, isSpare, isStrike, splitToFrames, isExtraFrame };
