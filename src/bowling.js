@@ -6,10 +6,10 @@ const isStrike = (roll) => roll === 10;
 
 const isSecondRollInFrame = rollNumber => rollNumber % 2 === 1;
 
-const fixFramesAfterStrikes = (rolls) => {
+const splitToFrames = (rolls) => {
   const newRolls = [...rolls];
   const frames = [];
-  while(newRolls.length > 0){
+  while (newRolls.length > 0) {
     const roll = newRolls.shift();
     if (isStrike(roll)) {
       frames.push([10, 0]);
@@ -17,7 +17,11 @@ const fixFramesAfterStrikes = (rolls) => {
       frames.push([roll, newRolls.shift()]);
     }
   }
-  return _.flatten(frames);
+  return frames;
+}
+
+const fixFramesAfterStrikes = (rolls) => {
+  return _.flatten(splitToFrames(rolls));
 }
 
 const calculateScore = (rolls) => {
@@ -33,4 +37,4 @@ const calculateScore = (rolls) => {
   );
 };
 
-export default { calculateScore, isSpare, isStrike, isSecondRollInFrame, fixFramesAfterStrikes };
+export default { calculateScore, isSpare, isStrike, isSecondRollInFrame, splitToFrames, fixFramesAfterStrikes };

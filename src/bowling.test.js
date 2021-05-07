@@ -64,4 +64,10 @@ describe('fixFramesAfterStrikes', () => {
     const expectedRolls = [5, 4, 10, 0, 3, 2, 0, 10, 1, 7];
     expect(bowling.fixFramesAfterStrikes(realRolls)).toEqual(expectedRolls);
   });
-})
+});
+
+describe('splitToFrames', () => {
+  it('should split rolls into frames', () => {
+    expect(bowling.splitToFrames([1, 2, 3, 4, 5, 6])).toEqual([[1, 2], [3, 4], [5, 6]]);
+  });
+});
