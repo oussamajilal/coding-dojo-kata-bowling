@@ -42,7 +42,7 @@ describe('calculateScore', () => {
   });
 
   it('should return correct score in case of all the frames does not have strikes nor spares', () => {
-    const rolls = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9];
+    const rolls = [9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0, 9, 0];
     expect(bowling.calculateScore(rolls)).toEqual(90);
   });
 });
