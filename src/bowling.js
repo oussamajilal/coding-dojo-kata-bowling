@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const isSpare = (frame) => !isStrike(frame) && _.sum(frame) === 10;
 
-const isStrike = (frame) => frame[0] === 10;
+const isStrike = (frame) => frame[0] === 11;
 
 const splitToFrames = (rolls) => {
   const newRolls = [...rolls];
